@@ -24,4 +24,5 @@ urlpatterns = [
     path('', include('reviews.urls')),
     path('', include('criteria.urls')),
     path('', include('userfollowers.urls')),
+    path('', include('challengefollowers.urls')),
 ]
