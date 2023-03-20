@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Submission
+from uploads.models import Upload
 
 
 class SubmissionSerializer(serializers.ModelSerializer):
@@ -25,5 +26,6 @@ class SubmissionSerializer(serializers.ModelSerializer):
         model = Submission
         fields = [
             'id', 'owner', 'challenge', 'text', 'is_owner',
-            'status', 'reviews', 'uploads',
+            'status', 'reviews', 'uploads', 'created_at',
+            'updated_at'
         ]
