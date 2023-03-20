@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'criteria',
     'userfollowers',
     'challengefollowers',
+    'uploads',
 ]
 
 MIDDLEWARE = [
