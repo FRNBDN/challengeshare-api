@@ -8,6 +8,7 @@ SUBMISSION_STATUS = (
     (3, 'Failed'),
 )
 
+
 class Submission(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
