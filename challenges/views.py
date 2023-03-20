@@ -12,7 +12,7 @@ QUERYSET = Challenge.objects.annotate(
         'submission', filter=Q(submission__status=2)
         )
     ).order_by('-created_at')
-
+    
 
 class ChallengesList(generics.ListCreateAPIView):
     serializer_class = ChallengeSerializer
@@ -20,6 +20,27 @@ class ChallengesList(generics.ListCreateAPIView):
         permissions.IsAuthenticatedOrReadOnly
     ]
     queryset = QUERYSET
+    filter_backends = [
+        filters.OrderingFilter,
+        filters.SearchFilter,
+        DjangoFilterBackend,
+    ]
+    filterset_fields = [
+        'owner__ufollowed__owner__profile',
+        'owner__profile',
+    ]
+    search_fields = [
+        'owner__username',
+        'title',
+        'description',
+        'tags__name',
+        'category'
+    ]
+    ordering_fields = [
+        'users_count',
+        'submissions_count',
+        'completed_count',
+    ]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

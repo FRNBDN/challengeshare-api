@@ -18,6 +18,7 @@ class ChallengeSerializer(serializers.ModelSerializer):
     submissions = serializers.SerializerMethodField()
     submissions_count = serializers.ReadOnlyField()
     cfollow_id = serializers.SerializerMethodField()
+    completed_count = serializers.ReadOnlyField()
 
     def get_is_owner(self, obj):
         request = self.context['request']
@@ -58,5 +59,5 @@ class ChallengeSerializer(serializers.ModelSerializer):
             'id', 'owner', 'title', 'is_owner', 'description',
             'profile_id', 'tags', 'profile_image', 'users_count',
             'created_at', 'updated_at', 'criteria', 'submissions',
-            'submissions_count', 'cfollow_id'
+            'submissions_count', 'cfollow_id', 'completed_count'
         ]
