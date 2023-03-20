@@ -12,7 +12,7 @@ QUERYSET = Challenge.objects.annotate(
         'submission', filter=Q(submission__status=2)
         )
     ).order_by('-created_at')
-    
+
 
 class ChallengesList(generics.ListCreateAPIView):
     serializer_class = ChallengeSerializer
