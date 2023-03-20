@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'submissions',
     'reviews',
     'criteria',
+    'userfollowers',
 ]
 
 MIDDLEWARE = [
