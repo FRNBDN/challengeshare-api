@@ -48,6 +48,7 @@ class ProfileList(generics.ListAPIView):
         'owner__username',
     ]
 
+
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     queryset = QUERYSET

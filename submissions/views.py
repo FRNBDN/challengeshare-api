@@ -1,9 +1,14 @@
 from rest_framework import generics, permissions
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import Submission
 from .serializers import SubmissionSerializer
 from challenge_api.permissions import IsOwnerOrReadOnly
 
-QUERYSET = Submission.objects.all()
+QUERYSET = Submission.objects.annotate(
+        reviews=Count(
+            'review', distinct=True
+        )
+    )
 
 
 class SubmissionList(generics.ListCreateAPIView):
@@ -12,6 +17,12 @@ class SubmissionList(generics.ListCreateAPIView):
         permissions.IsAuthenticatedOrReadOnly
     ]
     queryset = QUERYSET
+    filter_backends = [
+        DjangoFilterBackend,
+    ]
+    filterset_fields = [
+        'challenge',
+    ]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

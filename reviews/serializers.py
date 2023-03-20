@@ -23,7 +23,7 @@ class ReviewSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({
                 'detail': 'possible duplicate'
             })
-            
+
     def get_created_at(self, obj):
         return naturaltime(obj.created_at)
 
