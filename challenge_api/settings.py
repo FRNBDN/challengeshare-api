@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'challenges',
     'submissions',
     'reviews',
+    'criteria',
 ]
 
 MIDDLEWARE = [
