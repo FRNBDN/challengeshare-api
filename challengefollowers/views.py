@@ -5,7 +5,7 @@ from .serializers import ChallengeFollowerSerializer
 
 
 class ChallengeFollowerList(generics.ListCreateAPIView):
-    serializer_class = ChallengeFollower
+    serializer_class = ChallengeFollowerSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = ChallengeFollower.objects.all()
 
