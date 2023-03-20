@@ -1,9 +1,8 @@
 from django.db.models import Count, Q
 from rest_framework import generics, permissions, filters
-from django_filters.rest_framework import DjangoFilterBackend
 from .models import Challenge
 from .serializers import ChallengeSerializer
-from drf_api.permissions import IsOwnerOrReadOnly
+from challenge_api.permissions import IsOwnerOrReadOnly
 
 QUERYSET = Challenge.objects.all()
 

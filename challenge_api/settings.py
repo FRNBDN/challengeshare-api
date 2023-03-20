@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 
     'profiles',
     'challenges',
+    'submissions',
 ]
 
 MIDDLEWARE = [
