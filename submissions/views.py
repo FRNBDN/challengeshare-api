@@ -12,9 +12,6 @@ class SubmissionList(generics.ListCreateAPIView):
         permissions.IsAuthenticatedOrReadOnly
     ]
     queryset = QUERYSET
-    filter_backends = [
-        DjangoFilterBackend,
-    ]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

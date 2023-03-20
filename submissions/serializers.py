@@ -13,6 +13,6 @@ class SubmissionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Submission
         fields = [
-            'id', 'owner','challenge', 'text', 'is_owner',
+            'id', 'owner', 'challenge', 'text', 'is_owner',
             'status',
         ]
