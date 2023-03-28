@@ -15,10 +15,10 @@ CATEGORY_CHOICES = (
 
 
 class Challenge(models.Model):
-    owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
-    title = models.CharField(max_length=160, default="Challenge")
+    title = models.CharField(max_length=160)
     description = models.TextField(max_length=500, default='...')
     category = models.CharField(max_length=25,
                                 choices=CATEGORY_CHOICES,
