@@ -10,6 +10,14 @@ class UploadSerializer(serializers.ModelSerializer):
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner
+    
+    def validate(self, data):
+        submission_owner = data['submission'].owner
+        if self.context['request'].user != submission_owner:
+            raise serializers.ValidationError(
+                'You can only add uploads to owned submissions.',
+            )
+        return data
 
     class Meta:
         model = Upload
