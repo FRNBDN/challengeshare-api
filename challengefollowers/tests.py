@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 
-class ChallengeFollowerViewTests(APITestCase):
+class ChallengeFollowerListViewTests(APITestCase):
     def setUp(self):
         user = User.objects.create_user(username='test', password='pw')
         Challenge.objects.create(owner=user, title='test title')

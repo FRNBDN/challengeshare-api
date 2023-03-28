@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 
-class UserFollowerViewTests(APITestCase):
+class UserFollowerListViewTests(APITestCase):
     def setUp(self):
         user1 = User.objects.create_user(username='test', password='pw')
         user2 = User.objects.create_user(username='test2', password='pw')
