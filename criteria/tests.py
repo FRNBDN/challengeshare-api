@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from .models import Criteria
-from submissions.models import Submission
 from challenges.models import Challenge
 from rest_framework import status
 from rest_framework.test import APITestCase
