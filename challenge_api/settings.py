@@ -147,8 +147,9 @@ WSGI_APPLICATION = 'challenge_api.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-    
-if 'DEV' in os.environ:
+
+
+if 'DEV' in os.environ or s.environ.get('DJANGO_TESTING') == 'true':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
