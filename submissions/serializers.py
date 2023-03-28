@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Submission
 from uploads.models import Upload
+from django.db import IntegrityError
 
 
 class SubmissionSerializer(serializers.ModelSerializer):
@@ -21,6 +22,12 @@ class SubmissionSerializer(serializers.ModelSerializer):
         for upload in uploads:
             upload_list.append(upload.id)
         return upload_list
+
+    def create(self, validated_data):
+        try:
+            return super().create(validated_data)
+        except IntegrityError:
+            raise serializers.ValidationError({'detail': 'possible duplicate'})
 
     class Meta:
         model = Submission
