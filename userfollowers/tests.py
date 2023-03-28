@@ -25,6 +25,13 @@ class UserFollowerListViewTests(APITestCase):
         self.assertEqual(count, 2)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+    def test_loggedn_in_user_cant_create_multiple_userfollower(self):
+        self.client.login(username='test', password='pw')
+        response = self.client.post('/ufollowers/', {
+            'owner': '1',
+            'followed': '2'})
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
     def test_user_not_logged_in_cant_create_userfollower(self):
         response = self.client.post('/ufollowers/', {
             'owner': '2',

@@ -26,6 +26,13 @@ class ChallengeFollowerListViewTests(APITestCase):
         self.assertEqual(count, 1)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+    def test_loggedn_in_user_cant_create_multi_challengefollower(self):
+        self.client.login(username='test', password='pw')
+        response = self.client.post('/cfollowers/', {
+            'owner': '1',
+            'challenge': '1'})
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
     def test_user_not_logged_in_cant_create_challengefollower(self):
         response = self.client.post('/cfollowers/', {
             'owner': '1',
