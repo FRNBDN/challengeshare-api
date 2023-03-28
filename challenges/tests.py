@@ -7,7 +7,7 @@ from rest_framework.test import APITestCase
 class ChallengeListViewTests(APITestCase):
     def setUp(self):
         User.objects.create_user(username='test', password='pw')
-    
+
     def test_can_list_challenges(self):
         user = User.objects.get(username='test')
         Challenge.objects.create(owner=user, title='test title')
@@ -24,7 +24,7 @@ class ChallengeListViewTests(APITestCase):
         count = Challenge.objects.count()
         self.assertEqual(count, 1)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-    
+
     def test_user_not_logged_in_cant_create_challenge(self):
         response = self.client.post('/challenges/', {
             'title': 'test title',
