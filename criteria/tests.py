@@ -9,14 +9,14 @@ class CriteriaListViewTests(APITestCase):
     def setUp(self):
         user = User.objects.create_user(username='test', password='pw')
         chall = Challenge.objects.create(owner=user, title='test title')
-        
+
     def test_can_list_criteria(self):
         user = User.objects.get(username='test')
         chall = Challenge.objects.get(owner=user)
         Criteria.objects.create(owner=user, challenge=chall)
         response = self.client.get('/criteria/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-    
+
     def test_logged_in_user_can_create_criteria_to_own_challenge(self):
         self.client.login(username='test', password='pw')
         response = self.client.post('/criteria/', {
@@ -34,7 +34,7 @@ class CriteriaListViewTests(APITestCase):
             'challenge': '1',
             'text': 'text here'})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-    
+
     def test_not_logged_in_user_cant_create_criteria(self):
         response = self.client.post('/criteria/', {
             'owner': '1',
