@@ -12,7 +12,7 @@ class UploadList(generics.ListCreateAPIView):
     queryset = Upload.objects.all()
 
     def perform_create(self, serializer):
-        serializer.save()
+        serializer.save(owner=self.request.user)
 
 
 class UploadDetail(generics.RetrieveDestroyAPIView):
