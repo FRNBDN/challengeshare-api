@@ -10,6 +10,14 @@ class CriteriaSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.owner
 
+    def validate(self, data):
+        challenge_owner = data['challenge'].owner
+        if self.context['request'].user != challenge_owner:
+            raise serializers.ValidationError(
+                'You can only add criterias to owned challenges.',
+            )
+        return data
+
     class Meta:
         model = Criteria
         fields = [
