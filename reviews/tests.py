@@ -30,11 +30,11 @@ class ProfileListView(APITestCase):
         count = Review.objects.count()
         self.assertEqual(count, 1)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-    
+
     def test_logged_in_user_cant_create_multiple_review(self):
         user = User.objects.get(username='test')
         sub = Submission.objects.get(owner=user)
-        Review.objects.create(owner=user, submission=sub, vote_pass=False, 
+        Review.objects.create(owner=user, submission=sub, vote_pass=False,
                               body='test')
         self.client.login(username='test', password='pw')
         response = self.client.post('/reviews/', {
@@ -91,4 +91,3 @@ class ReviewDetailViewTests(APITestCase):
         self.client.login(username='test2', password='pw')
         response = self.client.delete('/reviews/1')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-
