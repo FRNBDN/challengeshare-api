@@ -7,6 +7,8 @@ from django.db import IntegrityError
 class SubmissionSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
+    profile_id = serializers.ReadOnlyField(source='owner.profile.id')
+    profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     reviews = serializers.ReadOnlyField()
     uploads = serializers.SerializerMethodField()
 
@@ -33,6 +35,7 @@ class SubmissionSerializer(serializers.ModelSerializer):
         model = Submission
         fields = [
             'id', 'owner', 'challenge', 'text', 'is_owner',
+            'profile_id', 'profile_image',
             'status', 'reviews', 'uploads', 'created_at',
             'updated_at'
         ]

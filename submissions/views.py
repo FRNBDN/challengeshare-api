@@ -8,7 +8,7 @@ from challenge_api.permissions import IsOwnerOrReadOnly
 QUERYSET = Submission.objects.annotate(
         reviews=Count(
             'review', distinct=True
-        )
+        ),
     )
 
 
