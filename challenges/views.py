@@ -28,6 +28,7 @@ class ChallengesList(generics.ListCreateAPIView):
     filterset_fields = [
         'owner__ufollowed__owner__profile',
         'owner__profile',
+        'challengefollower__owner__profile'
     ]
     search_fields = [
         'owner__username',
@@ -40,6 +41,7 @@ class ChallengesList(generics.ListCreateAPIView):
         'users_count',
         'submissions_count',
         'completed_count',
+        'challengefollower__created_at'
     ]
 
     def perform_create(self, serializer):
