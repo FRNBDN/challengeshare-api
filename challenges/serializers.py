@@ -57,7 +57,7 @@ class ChallengeSerializer(serializers.ModelSerializer):
         model = Challenge
         fields = [
             'id', 'owner', 'title', 'is_owner', 'description',
-            'profile_id', 'tags', 'profile_image', 'users_count',
+            'category', 'profile_id', 'tags', 'profile_image', 'users_count',
             'created_at', 'updated_at', 'criteria', 'submissions',
             'submissions_count', 'cfollow_id', 'completed_count'
         ]
