@@ -21,7 +21,7 @@ class CriteriaList(generics.ListCreateAPIView):
         serializer.save(owner=self.request.user)
 
 
-class CriteriaDetail(generics.RetrieveDestroyAPIView):
+class CriteriaDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Criteria.objects.all()
     serializer_class = CriteriaSerializer
