@@ -1,6 +1,7 @@
 from rest_framework import generics, permissions
 from challenge_api.permissions import IsOwnerOrReadOnly
 from .models import Upload
+from cloudinary import uploader, utils
 from .serializers import UploadSerializer
 
 

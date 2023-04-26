@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from submissions.models import Submission
+from cloudinary.models import CloudinaryField
 
 
 class Upload(models.Model):
@@ -10,7 +11,7 @@ class Upload(models.Model):
         on_delete=models.CASCADE,
         related_name='submissionuploads'
         )
-    upload = models.FileField(upload_to='uploads/', blank=True, null=True)
+    upload = CloudinaryField('upload', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
