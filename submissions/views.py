@@ -9,7 +9,7 @@ QUERYSET = Submission.objects.annotate(
         reviews=Count(
             'review', distinct=True
         ),
-    )
+    ).order_by('-created_at')
 
 
 class SubmissionList(generics.ListCreateAPIView):

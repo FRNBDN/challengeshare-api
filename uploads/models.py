@@ -10,7 +10,7 @@ class Upload(models.Model):
         on_delete=models.CASCADE,
         related_name='submissionuploads'
         )
-    upload = models.FileField(upload_to='uploads/', blank=True, null=True)
+    upload = models.ImageField(upload_to='uploads/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
