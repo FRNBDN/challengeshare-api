@@ -16,6 +16,7 @@ class ChallengeSerializer(serializers.ModelSerializer):
     criteria = serializers.SerializerMethodField()
     users_count = serializers.ReadOnlyField()
     submissions = serializers.SerializerMethodField()
+    has_submitted = serializers.SerializerMethodField()
     submissions_count = serializers.ReadOnlyField()
     cfollow_id = serializers.SerializerMethodField()
     completed_count = serializers.ReadOnlyField()
@@ -44,6 +45,15 @@ class ChallengeSerializer(serializers.ModelSerializer):
             submissionList.append(submission.id)
         return submissionList
 
+    def get_has_submitted(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            submission = Submission.objects.filter(
+                owner=user, challenge=obj
+            ).first()
+            return submission is not None
+        return False
+
     def get_cfollow_id(self, obj):
         user = self.context['request'].user
         if user.is_authenticated:
@@ -59,5 +69,6 @@ class ChallengeSerializer(serializers.ModelSerializer):
             'id', 'owner', 'title', 'is_owner', 'description',
             'category', 'profile_id', 'tags', 'profile_image', 'users_count',
             'created_at', 'updated_at', 'criteria', 'submissions',
-            'submissions_count', 'cfollow_id', 'completed_count'
+            'submissions_count', 'cfollow_id', 'completed_count',
+            'has_submitted'
         ]

@@ -1,7 +1,9 @@
 from rest_framework import generics, permissions
 from challenge_api.permissions import IsOwnerOrReadOnly
 from .models import Upload
+from cloudinary import uploader, utils
 from .serializers import UploadSerializer
+from cloudinary.forms import CloudinaryJsFileField
 
 
 class UploadList(generics.ListCreateAPIView):
@@ -15,7 +17,7 @@ class UploadList(generics.ListCreateAPIView):
         serializer.save(owner=self.request.user)
 
 
-class UploadDetail(generics.RetrieveDestroyAPIView):
+class UploadDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Upload.objects.all()
     serializer_class = UploadSerializer
