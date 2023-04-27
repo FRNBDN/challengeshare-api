@@ -1,19 +1,11 @@
 from rest_framework import serializers
 from .models import Upload
 from submissions.models import Submission
-from cloudinary.forms import CloudinaryFileField
 
 
 class UploadSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
-    upload = CloudinaryFileField(
-        options={
-            'resource_type': 'auto',
-            'allowed_formats': ['jpg', 'jpeg', 'png', 'gif', 'mp4']
-        },
-        required=True
-    )
 
     def get_is_owner(self, obj):
         request = self.context['request']
@@ -25,9 +17,6 @@ class UploadSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 'You can only add uploads to owned submissions.',
             )
-
-        if 'upload' in data:
-            data['upload'] = upload(data['upload'])
         return data
 
     class Meta:
