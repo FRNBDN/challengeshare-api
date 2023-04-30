@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions
+from django_filters.rest_framework import DjangoFilterBackend
 from challenge_api.permissions import IsOwnerOrReadOnly
 from .models import Upload
 from cloudinary import uploader, utils
@@ -12,6 +13,12 @@ class UploadList(generics.ListCreateAPIView):
         permissions.IsAuthenticatedOrReadOnly
     ]
     queryset = Upload.objects.all()
+    filter_backends = [
+        DjangoFilterBackend,
+    ]
+    filterset_fields = [
+        'submission',
+    ]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
