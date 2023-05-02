@@ -20,9 +20,25 @@ class SubmissionList(generics.ListCreateAPIView):
     queryset = QUERYSET
     filter_backends = [
         DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
     ]
     filterset_fields = [
         'challenge',
+        'owner__ufollowed__owner__profile',
+        'owner__profile',
+    ]
+    search_fields = [
+        'owner__username',
+        'text',
+    ]
+
+    ordering_fields = [
+        'status',
+        'reviews',
+        'completed_count',
+        'created_at',
+        'updated_at'
     ]
 
     def perform_create(self, serializer):
