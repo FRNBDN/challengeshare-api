@@ -13,6 +13,7 @@ class SubmissionSerializer(serializers.ModelSerializer):
     reviews = serializers.ReadOnlyField()
     uploads = serializers.SerializerMethodField()
     has_reviewed = serializers.SerializerMethodField()
+    status = serializers.SerializerMethodField()
 
     def get_is_owner(self, obj):
         request = self.context['request']
@@ -30,11 +31,22 @@ class SubmissionSerializer(serializers.ModelSerializer):
     def get_has_reviewed(self, obj):
         user = self.context['request'].user
         if user.is_authenticated:
-            reviews = Review.objects.filter(
+            review = Review.objects.filter(
                 owner=user, submission=obj
             ).first()
-            return submission is not None
+            return review is not None
         return False
+
+    def get_status(self, obj):
+        vote_pass = Review.objects.filter(
+            submission=obj, vote_pass=True).count()
+        reviews = obj.reviews
+        if obj.reviews < 3:
+            return 1
+        elif vote_pass > reviews:
+            return 2
+        else:
+            return 3
 
     def create(self, validated_data):
         try:
