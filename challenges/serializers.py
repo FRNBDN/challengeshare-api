@@ -3,14 +3,11 @@ from .models import Challenge
 from criteria.models import Criteria
 from submissions.models import Submission
 from challengefollowers.models import ChallengeFollower
-from taggit.serializers import (TagListSerializerField,
-                                TaggitSerializer)
 
 
 class ChallengeSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
-    tags = TagListSerializerField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     criteria = serializers.SerializerMethodField()
@@ -67,7 +64,7 @@ class ChallengeSerializer(serializers.ModelSerializer):
         model = Challenge
         fields = [
             'id', 'owner', 'title', 'is_owner', 'description',
-            'category', 'profile_id', 'tags', 'profile_image', 'users_count',
+            'category', 'profile_id', 'profile_image', 'users_count',
             'created_at', 'updated_at', 'criteria', 'submissions',
             'submissions_count', 'cfollow_id', 'completed_count',
             'has_submitted'

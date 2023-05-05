@@ -19,16 +19,14 @@ class ChallengeListViewTests(APITestCase):
     def test_logged_in_user_can_create_challenge(self):
         self.client.login(username='test', password='pw')
         response = self.client.post('/challenges/', {
-            'title': 'test title',
-            'tags': ['test',]})
+            'title': 'test title',})
         count = Challenge.objects.count()
         self.assertEqual(count, 1)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_user_not_logged_in_cant_create_challenge(self):
         response = self.client.post('/challenges/', {
-            'title': 'test title',
-            'tags': ['test',]})
+            'title': 'test title',})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
@@ -36,10 +34,8 @@ class ChallengeDetailViewTests(APITestCase):
     def setUp(self):
         user1 = User.objects.create_user(username='test', password='pw')
         user2 = User.objects.create_user(username='test2', password='pw')
-        Challenge.objects.create(owner=user1, title='test title',
-                                 tags=['test',])
-        Challenge.objects.create(owner=user2, title='test title2',
-                                 tags=['test2',])
+        Challenge.objects.create(owner=user1, title='test title',)
+        Challenge.objects.create(owner=user2, title='test title2',)
 
     def test_can_retrieve_challenge_using_valid_id(self):
         response = self.client.get('/challenges/1')

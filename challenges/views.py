@@ -34,7 +34,6 @@ class ChallengesList(generics.ListCreateAPIView):
         'owner__username',
         'title',
         'description',
-        'tags__name',
         'category'
     ]
     ordering_fields = [

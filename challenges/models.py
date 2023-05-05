@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from taggit.managers import TaggableManager
 
 
 CATEGORY_CHOICES = (
@@ -22,7 +21,6 @@ class Challenge(models.Model):
     category = models.CharField(max_length=25,
                                 choices=CATEGORY_CHOICES,
                                 default='ETC')
-    tags = TaggableManager(blank=True)
 
     class Meta:
         ordering = ['-created_at']
