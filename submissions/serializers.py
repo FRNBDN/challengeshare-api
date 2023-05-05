@@ -40,8 +40,8 @@ class SubmissionSerializer(serializers.ModelSerializer):
     def get_status(self, obj):
         vote_pass = Review.objects.filter(
             submission=obj, vote_pass=True).count()
-        reviews = obj.reviews
-        if obj.reviews < 3:
+        reviews = Review.objects.filter(submission=obj).count()
+        if reviews < 3:
             return 1
         elif vote_pass > reviews:
             return 2
