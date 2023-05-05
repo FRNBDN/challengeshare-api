@@ -3,7 +3,6 @@
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
-import taggit.managers
 
 
 class Migration(migrations.Migration):
@@ -12,7 +11,6 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('taggit', '0005_auto_20220424_2025'),
     ]
 
     operations = [
@@ -26,7 +24,6 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(default='...', max_length=500)),
                 ('category', models.CharField(choices=[('Spiritual', 'Spiritual'), ('Financial', 'Financial'), ('Career', 'Career'), ('Intellectual', 'Intellectual'), ('Fitness', 'Fitness'), ('Social', 'Social'), ('Other', 'Other')], default='ETC', max_length=25)),
                 ('owner', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('tags', taggit.managers.TaggableManager(blank=True, help_text='A comma-separated list of tags.', through='taggit.TaggedItem', to='taggit.Tag', verbose_name='Tags')),
             ],
             options={
                 'ordering': ['-created_at'],
