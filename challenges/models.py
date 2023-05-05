@@ -4,13 +4,12 @@ from taggit.managers import TaggableManager
 
 
 CATEGORY_CHOICES = (
-    ('Spiritual', 'Spiritual'),
-    ('Financial', 'Financial'),
-    ('Career', 'Career'),
-    ('Intellectual', 'Intellectual'),
+    ('Spread Positivity', 'Spread Positivity'),
     ('Fitness', 'Fitness'),
+    ('Adventure', 'Adventure'),
+    ('Creativity', 'Creativity'),
     ('Social', 'Social'),
-    ('Other', 'Other'),
+    ('Meme', 'Meme'),
 )
 
 
