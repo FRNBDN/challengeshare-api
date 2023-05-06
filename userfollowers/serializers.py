@@ -6,11 +6,12 @@ from .models import UserFollower
 class UserFollowerSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     followed_name = serializers.ReadOnlyField(source='followed.username')
+    owner_id = serializers.ReadOnlyField(source='owner.id')
 
     class Meta:
         model = UserFollower
         fields = [
-            'id', 'owner', 'created_at', 'followed', 'followed_name'
+            'id', 'owner', 'owner_id' , 'created_at', 'followed', 'followed_name'
         ]
 
     def create(self, validated_data):
