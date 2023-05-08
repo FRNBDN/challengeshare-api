@@ -12,7 +12,7 @@ class Criteria(models.Model):
     text = models.CharField(max_length=250)
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['created_at']
 
     def __str__(self):
         return f" ({self.id}) {self.text}"
