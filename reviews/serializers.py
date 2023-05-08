@@ -17,6 +17,11 @@ class ReviewSerializer(serializers.ModelSerializer):
         return request.user == obj.owner
 
     def create(self, validated_data):
+        sub = validated_data['submission']
+        if sub.owner == self.context['request'].user:
+            raise serializers.ValidationError({
+                'detail': 'You cannot review your own submission'
+            })
         try:
             return super().create(validated_data)
         except IntegrityError:

@@ -14,6 +14,11 @@ class ChallengeFollowerSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
+        challenge = validated_data['challenge']
+        if challenge.owner == self.context['request'].user:
+            raise serializers.ValidationError({
+                'detail': 'You cannot follow your own challenge'
+            })
         try:
             return super().create(validated_data)
         except IntegrityError:

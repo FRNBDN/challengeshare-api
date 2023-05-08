@@ -16,6 +16,11 @@ class UserFollowerSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
+        followed = validated_data['followed']
+        if followed == self.context['request'].user:
+            raise serializers.ValidationError({
+                'detail': 'You cannot follow yourself'
+            })
         try:
             return super().create(validated_data)
         except IntegrityError:
