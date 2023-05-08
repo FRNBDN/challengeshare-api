@@ -50,8 +50,7 @@ class UploadsDetailViewTests(APITestCase):
     def setUp(self):
         user1 = User.objects.create_user(username='test', password='pw')
         user2 = User.objects.create_user(username='test2', password='pw')
-        chall = Challenge.objects.create(owner=user1, title='test title',
-                                         tags=['test',])
+        chall = Challenge.objects.create(owner=user1, title='test title')
         sub = Submission.objects.create(owner=user1,
                                         challenge=chall, text='test')
         Upload.objects.create(owner=user1, submission=sub)

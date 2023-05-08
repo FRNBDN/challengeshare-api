@@ -44,9 +44,6 @@ class ProfileList(generics.ListAPIView):
         'owner__ufollowing__created_at',
         'owner__ufollowed__created_at',
     ]
-    search_fields = [
-        'owner__username',
-    ]
 
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):

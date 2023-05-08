@@ -19,14 +19,14 @@ class ChallengeListViewTests(APITestCase):
     def test_logged_in_user_can_create_challenge(self):
         self.client.login(username='test', password='pw')
         response = self.client.post('/challenges/', {
-            'title': 'test title',})
+            'title': 'test title', })
         count = Challenge.objects.count()
         self.assertEqual(count, 1)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_user_not_logged_in_cant_create_challenge(self):
         response = self.client.post('/challenges/', {
-            'title': 'test title',})
+            'title': 'test title'})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
@@ -48,16 +48,14 @@ class ChallengeDetailViewTests(APITestCase):
 
     def test_user_can_update_own_challenge(self):
         self.client.login(username='test', password='pw')
-        response = self.client.put('/challenges/1', {'title': 'updated title',
-                                                     'tags': ['test',]})
+        response = self.client.put('/challenges/1', {'title': 'updated title'})
         challenge = Challenge.objects.filter(pk=1).first()
         self.assertEqual(challenge.title, 'updated title')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_user_cant_update_other_users_challenges(self):
         self.client.login(username='test', password='pw')
-        response = self.client.put('/challenges/2', {'title': 'updated title',
-                                                     'tags': ['test',]})
+        response = self.client.put('/challenges/2', {'title': 'updated title'})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_user_can_delete_own_challenge(self):
