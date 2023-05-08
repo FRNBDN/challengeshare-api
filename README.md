@@ -19,26 +19,6 @@ This application was built with the help of a Database Diagram which will be dis
 ## Project Planning
 The project as I mentioned above was planned out using a database diagram, Lucidchart, after first deciding on what the application should be used for, and what core features should be there, I put that into the diagram to get a better sense of how to configure the models.
 
-# Table of Contents
-
-## Contents
-- [Data Model & Crud table](#the-data-model)
-- [Technology Used](#technology-used)
-  * [Languages used](#languages-used)
-  * [Frameworks & Libraries used](#frameworks-and-libraries-used)
-- [Testing](#testing)
-  * [Manual Testing](#manual-testing)
-  * [Automated Testing](#automated-testing)
-  * [Bugs found and solved](#bugs-found-and-solved)
-    * [Unsolved bugs](#unsolved-bugs)
-- [Deployment](#deployment)
-  * [Deployment steps](#deployment-steps)
-  * [Creating a local clone](#creating-a-local-clone)
-- [Credits](#credits)
-  * [Code](#code)
-    * [Code Institute](#code-institute)
-  * [Acknowledgments](#acknowledgements)
-
 
 # Data model & CRUD breakdown
 
@@ -137,61 +117,299 @@ The project as I mentioned above was planned out using a database diagram, Lucid
 # Testing
 
 ## Manual Tests
+
 Below is a series of manual tests that tests the basic crud functionality of all the models through expected useage of the models, the tests were carried out in the api view on a locally run database, the database is however the same as production.
 
-### Profile Test Case
+## Profile Test Case
 
-#### Create Profile 
+The profile testcase tests the user model through Creating a user, see the profile being made, update profile as the user cant be deleted, just updated.
 
-#### Profile List View
+### Create Profile 
 
-#### Update Profile Information
+Start with creating a user from from the '/dj-rest-auth/registration/' simulating creating a user from the frontend.
 
+<img src='media/profiler.png'/>
 
-### Challenge & Criteria Test Case
-
-#### Create Challenge and then Criteria
-
-#### List View of Challenge, Criteria
-
-#### Update Challenge, Criteria
-
-#### Delete Criteria, Challenge, Test Cascade
-
-
-### Submissions, Uploads & Revies Test Case
-
-#### Create Submission and then Uploads 
-
-#### Create Review, Test Unique Together Constraint
-
-#### List View of Submission, Uploads, Reviews
-
-#### Update Submission, Upload, Review
-
-#### Delete Submission, Upload, Review, Test Cascade
-
-
-### ChallengeFollow Test Case
-
-#### Create Challenge Follow
+<img src='media/profileconf.png'/>
 
 ### List View
 
-#### Test Unique Together constraint
+List of profiles, including the recently added one on top
 
-#### Test Delete
+<img src='media/profileslist.png'/>
+
+### Update Profile Information
+
+Updating the profile by changing the bio and the upload
+
+<img src='media/profileput200.png'/>
+
+<img src='media/profileput.png'/>
+
+Success, all of the responses were what was expected and all the information was updated appropriately.
 
 
-### UserFollow Test Case
+## Challenge & Criteria Test Case
 
-#### Create  UserFollow
+The Challenge testcase includes criteria, because the criteria will be made in the same form as the challenge, so in the real application they are very much linked.
+
+We will first create a challenge and criteria, update them and delete them testing their validations and the cascading effect, make sure everything goes as planned.
+
+## Create Challenge and then Criteria
+
+Screenshot showing the challenge creation and the data in the payload
+
+<img src='media/challengepost.png'>
+
+<img src='media/challengepost201.png'>
+
+Creating criterion (The data is shown in the list view below, poor screenshotting by me):
+
+<img src='media/criteriapost.png'>
+
+criterion being posted on a not owned challenge
+
+<img src='media/criteriapostf.png'>
+
+<img src='media/criteriapostf400.png'>
+
+### List View of Challenge, Criteria
+
+List view of challenges:
+
+<img src='media/challengelist.png'>
+
+List view of criteria:
+
+<img src='media/criterialist.png'>
+
+
+
+### Update Challenge, Criteria
+
+Challenge update:
+
+<img src='media/challengeput.png'>
+
+The fields were updated as expected, note that there is a criteria with id 11 here
+
+<img src='media/challengeput200.png'>
+
+criterion update:
+
+<img src='media/criteriaput.png'>
+
+The fields were updated as expected
+
+<img src='media/criteriaput200.png'>
+
+### Delete Criteria, Challenge, Test Cascade
+
+For the deletion of criteria and challenges, I will start with trying to delete a criterion, then the challenge, which has an extra criteria added as mentioned next to the challenge update, to see that the cascade works
+
+criterion delete:
+
+<img src='media/criteriadel.png'>
+
+challenge delete:
+
+<img src='media/challengedel.png'>
+
+the criteria with id of 10 and 11 is not in the list as expected
+
+<img src='media/challengedelcasc.png'>
+
+Success, everything is working as expected
+
+
+
+
+## Submissions, Uploads & Reviews Test Case
+
+The submission testcase is very much like the challenge one, but this time there is two extra models caked in, since the submission model has uploads by the user and reviews from other users.
+
+### Create Submission and then Uploads 
+
+First we create a submission, like the challenges and criteria, the uploads are tied to the submission model by always being created or updated together.
+ 
+<img src='media/subpost.png'>
+
+The payload matches the created submission
+
+When the user tries to submit another submission to the same dare...
+
+<img src='media/subpost2.png'>
+
+They get this error message
+
+Creating uploads to own submission, id 2:
+
+<img src='media/uploadpost.png'>
+
+Creating second upload to own submission, id 3:
+
+<img src='media/uploadpost2.png'>
+
+Creating upload to not owned submission:
+
+<img src='media/uploadpost400.png'>
+
+So users can create uploads to their own submissions, but not others submissions, and they are not unique together.
+
+
+### Create Review, Test Unique Together Constraint
+
+Now lets try reviewing another users submission, review id 4:
+
+<img src='media/reviewpost201.png'>
+
+Try reviewing my own submission:
+
+<img src='media/reviewpost400own.png'>
+
+And finally a second review to another users submission
+
+<img src='media/reviewpostdup.png'>
+
+
+### List View of Submission, Uploads, Reviews
+
+Next is testing that the list view is showing all the fields. 
+
+Submission list (created submission= id 10):
+
+<img src='media/sublist.png'>
+
+Uploads List id 2, 3: 
+
+<img src='media/uploadlist.png'>
+
+Review List id 4:
+
+<img src='media/reviewlist.png'>
+
+While testing this I noticed that I was allowed to review my own submission, as you can see with id 5 in the list, but as you saw above, that has been fixed
+
+### Update Submission, Upload, Review
+
+Testing updating the models with .put, changing the payload as shown in the pictures:
+
+Submission updating text
+
+<img src='media/subput.png'>
+
+updating text successfully
+
+Upload updating the file
+
+<img src='media/uploadput.png'>
+
+Changed the picture from firstpic to newpic successfully
+
+Review updating body, vote_pass
+
+<img src='media/reviewput.png'>
+
+Changed the body as shown in picture, vote_pass from true>false, sucess
+
+### Delete Submission, Upload, Review, Test Cascade
+
+Now testing that the deletion works as expected
+
+Upload Deletion:
+
+<img src='media/uploaddel.png'>
+
+deletes the upload successfully
+
+review deletion:
+
+<img src='media/reviewdel.png'>
+
+deletes the review successfully
+
+submission deletion:
+
+<img src='media/subdel.png'>
+
+deletes the submission successfully
+
+The reviews list above had id 5 and 4 by user test and we deleted id 4 two picturess up:
+
+<img src='media/subcascreview.png'>
+
+the review list after deletion of submission shows that even id 5 was deleted, confirming that the cascade works as expected
+
+
+
+## ChallengeFollow Test Case
+The challengefollow model test case is testing the creation and deletion and the fields in the view
+
+### Create ChallengeFollow
+
+Creating a ChallengeFollow, in the frontend this would be following(bookmarking) a challenge(dare):
+
+<img src='media/cfollowpost.png'>
+
+the ChallengeFollow instance is created with the corrent ForeignKeys
+
+<img src='media/cfollowpostdup.png'>
+
+the ChallengeFollow instance is not able to be created more than once, since you cant bookmark the post twice
+
+<img src='media/cfollowself.png'>
+
+the ChallengeFollow instance is not created as the user not allowed to follow their own challenges
 
 ### List View
 
-#### Test Unique Together constraint, Follow Self
+<img src='media/cfollowlist.png'>
 
-#### Test Delete
+Note the first one with id of 9 and challenge 11, the post got deleted
+
+<img src='media/challengedelcasccfollow.png'>
+
+And here is the result after the post was deleted, it was sucessfully cascaded
+
+### Test Delete
+
+<img src='media/cfollowdel.png'>
+
+the challengefollow is successfully deleted the cfollowers id 8
+
+
+
+## UserFollow Test Case
+
+The userfollow model test case is testing the creation and deletion and the fields in the view
+
+### Create  UserFollow
+
+Creating a UserFollow, in the frontend this would be following a user:
+
+<img src='media/ufollowpost.png'>
+
+Successfully follow the user
+
+<img src='media/ufollowpostdup.png'>
+
+doesnt allow following a user twice
+
+<img src='media/ufollowself.png'>
+
+doesnt allow following yourself
+
+### List View
+
+<img src='media/ufollowlist.png'>
+
+created userfollow is in the list
+
+### Test Delete
+
+<img src='media/ufollowdel.png'>
+
+Deletes successfully
 
 
 
@@ -209,6 +427,7 @@ To give the reader an overview, the following tests were done:
 
 ## Validators
 All python code has been run through the python validator without issues.
+
 <img src='media/django-problems.png'>
 
 ## Automated testing
