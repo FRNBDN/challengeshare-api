@@ -45,7 +45,7 @@ class UploadsListViewTests(APITestCase):
             })
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
-    
+
 class UploadsDetailViewTests(APITestCase):
     def setUp(self):
         user1 = User.objects.create_user(username='test', password='pw')
@@ -63,7 +63,7 @@ class UploadsDetailViewTests(APITestCase):
     def test_cant_retrieve_upload_using_invalid_id(self):
         response = self.client.get('/uploads/44')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-    
+
     def test_user_can_delete_own_uploads(self):
         self.client.login(username='test', password='pw')
         response = self.client.delete('/uploads/1')
