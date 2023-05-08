@@ -38,11 +38,7 @@ class ProfileList(generics.ListAPIView):
         'owner__ufollowed__owner__profile'
     ]
     ordering_fields = [
-        'ufollowers_count',
-        'ufollowing_count',
-        'challenges_created',
-        'owner__ufollowing__created_at',
-        'owner__ufollowed__created_at',
+        'followers_count',
     ]
 
 
