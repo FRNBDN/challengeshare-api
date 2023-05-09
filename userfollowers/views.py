@@ -6,6 +6,10 @@ from .serializers import UserFollowerSerializer
 
 
 class UserFollowerList(generics.ListCreateAPIView):
+    """
+    UserFollower list view with filters for people following
+    user and people user is following
+    """
     serializer_class = UserFollowerSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = UserFollower.objects.all()

@@ -5,6 +5,8 @@ from challenges.models import Challenge
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+# Test basic CRUD functionality of Model
+
 
 class ProfileListView(APITestCase):
     def setUp(self):

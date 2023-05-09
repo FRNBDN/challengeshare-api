@@ -5,6 +5,10 @@ from .models import Review
 
 
 class ReviewSerializer(serializers.ModelSerializer):
+    """
+    ReviewSerializer validates that user hasnt reviewed the
+    submission before/is owner. gets profile id/image.
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')

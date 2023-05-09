@@ -4,6 +4,9 @@ from challenges.models import Challenge
 
 
 class Criteria(models.Model):
+    """
+    Criteria model tied to Challenge Model through challenge
+    """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

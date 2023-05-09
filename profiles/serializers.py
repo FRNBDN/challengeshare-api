@@ -4,6 +4,10 @@ from userfollowers.models import UserFollower
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    """
+    Add fields for challenge, submission interactions
+    and checks if owner, followers/ing count
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     following_id = serializers.SerializerMethodField()

@@ -4,6 +4,8 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 
+# Test for the basic CRUD Functionality of Model
+
 class ChallengeListViewTests(APITestCase):
     def setUp(self):
         User.objects.create_user(username='test', password='pw')

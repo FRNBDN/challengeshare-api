@@ -3,6 +3,10 @@ from criteria.models import Criteria
 
 
 class CriteriaSerializer(serializers.ModelSerializer):
+    """
+    Checks to ensure that you are the owner, for deletion
+    That you only add criteria to owned dares.
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
 

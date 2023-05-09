@@ -6,6 +6,11 @@ from challengefollowers.models import ChallengeFollower
 
 
 class ChallengeSerializer(serializers.ModelSerializer):
+    """
+    Challenge Serializer
+    Adds fields fields from related Models,
+    Related Models: Submission, Criterion
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')

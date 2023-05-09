@@ -4,6 +4,11 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
+    """
+    Profile owner is tied to User model as a one to one field
+    User is created on post_save and there can only be one user
+    per Profile
+    """
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

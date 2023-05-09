@@ -4,6 +4,11 @@ from challenges.models import Challenge
 
 
 class ChallengeFollower(models.Model):
+    """
+    ChallengeFollower Model
+    Related to User, who is following the challenge
+    and Challenge, being followed
+    """
     owner = models.ForeignKey(
         User, on_delete=models.CASCADE
     )

@@ -4,6 +4,11 @@ from submissions.models import Submission
 
 
 class Upload(models.Model):
+    """
+    Upload model related to user model through owner
+    and submission model through submission. Allows for
+    one image uploaded per upload
+    """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     submission = models.ForeignKey(
         Submission,

@@ -13,6 +13,10 @@ QUERYSET = Submission.objects.annotate(
 
 
 class SubmissionList(generics.ListCreateAPIView):
+    """
+    Submission filterscfor challenge, followed users
+    and user owned and search field on username and text
+    """
     serializer_class = SubmissionSerializer
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly

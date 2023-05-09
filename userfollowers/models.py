@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 
 
 class UserFollower(models.Model):
+    """
+    UserFollower model where users models follow user model
+    Owner is the model following, followed is the model being followed
+    """
     owner = models.ForeignKey(
         User, related_name='ufollowing', on_delete=models.CASCADE
     )

@@ -8,6 +8,10 @@ from cloudinary.forms import CloudinaryJsFileField
 
 
 class UploadList(generics.ListCreateAPIView):
+    """
+    UploadList with added filter for filtering
+    Uploads by submission
+    """
     serializer_class = UploadSerializer
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly

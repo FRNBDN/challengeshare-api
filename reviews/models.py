@@ -4,6 +4,10 @@ from submissions.models import Submission
 
 
 class Review(models.Model):
+    """
+    Model for the revies, foreign key relationship with
+    submission model.
+    """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     submission = models.ForeignKey(Submission, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

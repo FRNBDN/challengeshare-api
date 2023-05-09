@@ -4,6 +4,10 @@ from submissions.models import Submission
 
 
 class UploadSerializer(serializers.ModelSerializer):
+    """
+    Serializer validates size of the image and if
+    user is uploading to owned submissions.
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
 

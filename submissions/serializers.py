@@ -6,6 +6,10 @@ from django.db import IntegrityError
 
 
 class SubmissionSerializer(serializers.ModelSerializer):
+    """
+    Gets uploads and reviews tied to submission and validates
+    if user has reviewed
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')

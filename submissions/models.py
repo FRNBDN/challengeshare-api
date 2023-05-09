@@ -10,6 +10,10 @@ SUBMISSION_STATUS = (
 
 
 class Submission(models.Model):
+    """
+    Submission model tied to user model through owner,
+    challenge model through challenge
+    """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -4,6 +4,9 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 
+# Test Basic Crud Functionality of Model
+
+
 class ProfileListView(APITestCase):
     def setUp(self):
         user = User.objects.create_user(username='test', password='pw')

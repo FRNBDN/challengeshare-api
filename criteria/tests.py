@@ -4,6 +4,8 @@ from challenges.models import Challenge
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+# Tests for basic CRUD functionality of the Model
+
 
 class CriteriaListViewTests(APITestCase):
     def setUp(self):

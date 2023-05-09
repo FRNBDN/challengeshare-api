@@ -15,6 +15,10 @@ QUERYSET = Challenge.objects.annotate(
 
 
 class ChallengesList(generics.ListCreateAPIView):
+    """
+    ListView for Challenges, create challenge,
+    Adds filters and search fields to challengelist
+    """
     serializer_class = ChallengeSerializer
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly
@@ -48,6 +52,10 @@ class ChallengesList(generics.ListCreateAPIView):
 
 
 class ChallengeDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    DetailView for Challenges,
+    View, delete, update if owner, otherwise only view
+    """
     serializer_class = ChallengeSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = QUERYSET

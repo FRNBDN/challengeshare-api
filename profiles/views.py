@@ -26,6 +26,12 @@ QUERYSET = Profile.objects.annotate(
 
 
 class ProfileList(generics.ListAPIView):
+    """
+    ProfileListView with
+    added filters for filtering profiles
+    on followed / following / ordering on count
+    for top profiles
+    """
     queryset = QUERYSET
     serializer_class = ProfileSerializer
     filter_backends = [

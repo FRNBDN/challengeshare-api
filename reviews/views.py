@@ -6,6 +6,10 @@ from .serializers import ReviewSerializer, ReviewDetailSerializer
 
 
 class ReviewList(generics.ListCreateAPIView):
+    """
+    List View filters on submission
+    to get all reviews tied to submission
+    """
     serializer_class = ReviewSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Review.objects.all()

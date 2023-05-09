@@ -4,6 +4,11 @@ from .models import ChallengeFollower
 
 
 class ChallengeFollowerSerializer(serializers.ModelSerializer):
+    """
+    CFollowSerializer
+    Validates if user is trying to follow own challenge
+    or if the user is tryng to follow again.
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     challenge_name = serializers.ReadOnlyField(source='challenge.title')
 
